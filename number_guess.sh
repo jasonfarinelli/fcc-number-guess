@@ -3,6 +3,7 @@
 PSQL="psql -X --username=freecodecamp --dbname=number_game --tuples-only -c"
 
 NUMBER=$(( RANDOM % 1000 + 1)) 
+NUMBER_OF_GUESSES=0
 
 PLAY_GAME() {
   if [[ $1 ]]
@@ -12,6 +13,7 @@ PLAY_GAME() {
     echo "Guess the secret number between 1 and 1000:"
   fi
   read GUESS
+  NUMBER_OF_GUESSES=$(($NUMBER_OF_GUESSES + 1))
 
   #If guess is not a number
   if [[ ! $GUESS =~ ^[0-9]+$ ]]
@@ -21,7 +23,7 @@ PLAY_GAME() {
 
   if [[ $GUESS -eq $NUMBER ]]
   then
-    echo "You guessed it in X tries. The secret number was $NUMBER. Nice job!"
+    echo "You guessed it in $NUMBER_OF_GUESSES tries. The secret number was $NUMBER. Nice job!"
     GAME_OVER
   else
     if [[ $GUESS -lt $NUMBER ]]
