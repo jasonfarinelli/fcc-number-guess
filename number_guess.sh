@@ -23,7 +23,7 @@ PLAY_GAME() {
 
   if [[ $GUESS -eq $NUMBER ]]
   then
-    echo "You guessed it in $NUMBER_OF_GUESSES tries. The secret number was $NUMBER. Nice job!"
+    echo -e "\nYou guessed it in $NUMBER_OF_GUESSES tries. The secret number was $NUMBER. Nice job!"
     GAME_OVER
   else
     if [[ $GUESS -lt $NUMBER ]]
