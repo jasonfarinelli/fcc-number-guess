@@ -4,6 +4,22 @@ PSQL="psql -X --username=freecodecamp --dbname=number_game --tuples-only -c"
 
 NUMBER=$(( RANDOM % 1000 + 1)) 
 
+PLAY_GAME() {
+  if [[ $1 ]]
+  then
+    echo -e "\n$1"
+  else
+    echo "Guess the secret number between 1 and 1000:"
+  fi
+  read GUESS
+
+  #If guess is not a number
+  if [[ ! $GUESS =~ ^[0-9]+$ ]]
+  then
+    PLAY_GAME "That is not an integer, guess again:"
+  fi
+}
+
 echo 'Enter your username:'
 read USERNAME
 
@@ -21,3 +37,5 @@ then
 else
   echo "Welcome, $USERNAME! It looks like this is your first time here."
 fi
+
+PLAY_GAME
