@@ -18,6 +18,28 @@ PLAY_GAME() {
   then
     PLAY_GAME "That is not an integer, guess again:"
   fi
+
+  if [[ $GUESS -eq $NUMBER ]]
+  then
+    echo "You guessed it in X tries. The secret number was $NUMBER. Nice job!"
+    GAME_OVER
+  else
+    if [[ $GUESS -lt $NUMBER ]]
+    then
+      PLAY_GAME "It's higher than that, guess again:"
+    else
+      if [[ $GUESS -gt $NUMBER ]]
+      then
+        PLAY_GAME "It's lower than that, guess again:"
+      else 
+        echo "Logic Error"
+      fi
+    fi
+  fi
+}
+
+GAME_OVER() {
+  echo "Thank you for playing!"
 }
 
 echo 'Enter your username:'
