@@ -41,7 +41,13 @@ PLAY_GAME() {
 }
 
 GAME_OVER() {
-  echo "Thank you for playing!"
+  if [[ -z $USER_ID ]]
+  then
+    INSERT_USER_RESULT=$($PSQL "INSERT INTO users (username) VALUES ('$USERNAME')")
+    USER_ID=$($PSQL "SELECT user_id FROM users WHERE username = '$USERNAME'")
+  fi
+
+  INSERT_GAME_DATA_RESULT=$($PSQL "INSERT INTO games (user_id, number_of_guesses) VALUES($USER_ID, $NUMBER_OF_GUESSES)")
 }
 
 echo 'Enter your username:'
